@@ -1,12 +1,12 @@
-﻿using Dalamud.Game.Command;
+using Dalamud.Game.Command;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using System.IO;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
-using SamplePlugin.Windows;
+using DutyPopNotifier.Windows;
 
-namespace SamplePlugin;
+namespace DutyPopNotifier;
 
 public sealed class Plugin : IDalamudPlugin
 {
