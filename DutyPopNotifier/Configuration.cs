@@ -9,10 +9,9 @@ public class Configuration : IPluginConfiguration
 {
     public int Version { get; set; } = 0;
 
-    public bool IsConfigWindowMovable { get; set; } = true;
-    public bool SomePropertyToBeSavedAndWithADefault { get; set; } = true;
-    public bool alma { get; set; } = true;
-
+    public string DaemonURL{get; set;} = ""; 
+    public bool OnState {get;set;} = false;
+    public string Passkey {get;set;} = "";
     // the below exist just to make saving less cumbersome
     public void Save()
     {

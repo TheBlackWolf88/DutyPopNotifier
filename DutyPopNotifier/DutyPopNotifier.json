@@ -2,7 +2,7 @@
   "Author": "TheBlackWolf88",
   "Name": "DutyPopNotifier",
   "Punchline": "So you can go make a sandwich while queuing.",
-  "Description": "Almalevesdoboz",
+  "Description": "DutyPopNotifier is a handy little plugin that sends an HTTP request to a website of your choice whenever a duty pops. It's perfect for staying in the loop when a duty pops up.",
   "ApplicableVersion": "any",
   "Tags": [
     "duty",

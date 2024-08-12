@@ -1,4 +1,5 @@
 using Dalamud.Game.Command;
+using Dalamud.Game.ClientState;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using System.IO;
@@ -13,31 +14,37 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] internal static IDalamudPluginInterface PluginInterface { get; private set; } = null!;
     [PluginService] internal static ITextureProvider TextureProvider { get; private set; } = null!;
     [PluginService] internal static ICommandManager CommandManager { get; private set; } = null!;
+    [PluginService] internal static IPluginLog Log { get; private set; } = null!;
+    [PluginService] internal static IClientState ClientState {get; private set;} = null!;
+    [PluginService] internal static IGameLifecycle GameLifecycle {get; private set;} = null!;
+    [PluginService] internal static IGameInteropProvider GameInteropProvider {get; private set;} = null!;
 
-    private const string CommandName = "/pmycommand";
+
+    private const string CommandName = "/dpn";
 
     public Configuration Configuration { get; init; }
 
-    public readonly WindowSystem WindowSystem = new("SamplePlugin");
+
+
+    public readonly WindowSystem WindowSystem = new("DutyPopNotifier");
     private ConfigWindow ConfigWindow { get; init; }
     private MainWindow MainWindow { get; init; }
 
     public Plugin()
     {
         Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
-
+        
         // you might normally want to embed resources and load them from the manifest stream
-        var goatImagePath = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "goat.png");
 
         ConfigWindow = new ConfigWindow(this);
-        MainWindow = new MainWindow(this, goatImagePath);
+        MainWindow = new MainWindow(this);
 
         WindowSystem.AddWindow(ConfigWindow);
         WindowSystem.AddWindow(MainWindow);
 
         CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
         {
-            HelpMessage = "A useful message to display in /xlhelp"
+                HelpMessage = "Use /dpn to get started."
         });
 
         PluginInterface.UiBuilder.Draw += DrawUI;
@@ -70,4 +77,5 @@ public sealed class Plugin : IDalamudPlugin
 
     public void ToggleConfigUI() => ConfigWindow.Toggle();
     public void ToggleMainUI() => MainWindow.Toggle();
+
 }
