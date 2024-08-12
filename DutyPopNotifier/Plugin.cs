@@ -6,18 +6,20 @@ using System.IO;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
 using DutyPopNotifier.Windows;
+using Dalamud.Game;
 
 namespace DutyPopNotifier;
 
-public sealed class Plugin : IDalamudPlugin
+public class Plugin : IDalamudPlugin
 {
     [PluginService] internal static IDalamudPluginInterface PluginInterface { get; private set; } = null!;
     [PluginService] internal static ITextureProvider TextureProvider { get; private set; } = null!;
     [PluginService] internal static ICommandManager CommandManager { get; private set; } = null!;
-    [PluginService] internal static IPluginLog Log { get; private set; } = null!;
+    [PluginService] public static IPluginLog Log { get; private set; } = null!;
     [PluginService] internal static IClientState ClientState {get; private set;} = null!;
+    [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
     [PluginService] internal static IGameLifecycle GameLifecycle {get; private set;} = null!;
-    [PluginService] internal static IGameInteropProvider GameInteropProvider {get; private set;} = null!;
+    [PluginService] public static IGameInteropProvider GameInteropProvider {get; private set;} = null!;
 
 
     private const string CommandName = "/dpn";
@@ -55,6 +57,8 @@ public sealed class Plugin : IDalamudPlugin
 
         // Adds another button that is doing the same but for the main ui of the plugin
         PluginInterface.UiBuilder.OpenMainUi += ToggleMainUI;
+
+
     }
 
     public void Dispose()
